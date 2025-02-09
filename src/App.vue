@@ -1,47 +1,25 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import TldsTable from './components/TldsTable.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
   <main>
-    <TheWelcome />
+    <div class="w-200 m-auto p-5">
+      <h1>TLDs with info about country</h1>
+      <p>
+        Here you can find a list of all TLDs and their corresponding countries and organisations.
+      </p>
+      <p>Click on a column header to filter the data by that column.</p>
+      <p>
+        Source, data and scrapper available on
+        <a
+          href="https://github.com/SlickDomique/tlds-by-country"
+          target="_blank"
+          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          >Github</a
+        >
+      </p>
+    </div>
+    <TldsTable />
   </main>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>

@@ -5,7 +5,7 @@ import TldsTable from './components/TldsTable.vue'
 <template>
   <main>
     <div class="w-200 m-auto p-5">
-      <h1>TLDs with info about country</h1>
+      <h1>TLDs with info about associated organisation and its country</h1>
       <p>
         Here you can find a list of all TLDs and their corresponding countries and organisations.
       </p>

@@ -68,11 +68,11 @@
                   <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     <input
                       type="checkbox"
-                      :value="value"
+                      :value="value.val"
                       v-model="state.filters[columnName]"
                       :class="`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ${state.searchFilter && !searchedFilterValues.includes(value) ? 'hidden' : ''}`"
                     />
-                    {{ value }}
+                    {{ value.val || 'Empty' }} ({{ value.counter }})
                   </label>
                 </div>
               </div>
@@ -122,7 +122,19 @@ onMounted(async () => {
         if (['country', 'organisation', 'whoisOrg'].includes(key)) {
           state.filters[key] = []
 
-          state.columnValues[key] = [...new Set(state.data.map((item) => String(item[key])))].sort()
+          const countedColumnVals = state.data.reduce((acc, item) => {
+            if (acc[item[key]] === undefined)
+              acc[item[key]] = {
+                val: item[key],
+                counter: 0,
+              }
+            acc[item[key]].counter += 1
+            return acc
+          }, {})
+
+          state.columnValues[key] = Object.keys(countedColumnVals)
+            .map((key) => countedColumnVals[key])
+            .sort((a, b) => b.counter - a.counter)
         }
         return acc
       }, {})
